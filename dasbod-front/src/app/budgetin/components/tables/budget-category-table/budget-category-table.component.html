@@ -1,0 +1,26 @@
+<p-table [value]="budgetCategories()" [tableStyle]="{ 'min-width': '60rem' }" dataKey="id">
+  <ng-template #caption>
+    <div class="flex items-center justify-between">
+      <span class="text-xl font-bold">Categories</span>
+      <p-button icon="pi pi-refresh" rounded raised />
+    </div>
+  </ng-template>
+  <ng-template #header>
+    <tr>
+      <th>Nom</th>
+      <th>Prévu</th>
+      <th>Dépensé</th>
+      <th>Restant</th>
+      <th>%</th>
+    </tr>
+  </ng-template>
+  <ng-template #body let-category>
+    <tr>
+      <td>{{ category.entityData.name }}</td>
+      <td>{{ category.entityData.amount | currency: 'EUR' }}</td>
+      <td>{{ category.computedFields.spent | currency: 'EUR' }}</td>
+      <td>{{ category.computedFields.remaining | currency: 'EUR' }}</td>
+      <td>{{ category.computedFields.percentSpent }}</td>
+    </tr>
+  </ng-template>
+</p-table>

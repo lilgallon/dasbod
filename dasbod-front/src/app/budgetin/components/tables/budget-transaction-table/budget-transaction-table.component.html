@@ -1,0 +1,28 @@
+<p-table [value]="budgetTransactions()" [tableStyle]="{ 'min-width': '60rem' }">
+  <ng-template #caption>
+    <div class="flex items-center justify-between">
+      <span class="text-xl font-bold">Transactions</span>
+      <p-button icon="pi pi-refresh" rounded raised />
+    </div>
+  </ng-template>
+  <ng-template #header>
+    <tr>
+      <th>Date</th>
+      <th>Amount</th>
+      <th>Description</th>
+      <th>Catégorie</th>
+      <th>Status</th>
+    </tr>
+  </ng-template>
+  <ng-template #body let-transaction>
+    <tr>
+      <td>{{ transaction.entityData.date | date: 'mediumDate' }}</td>
+      <td>{{ transaction.entityData.amount | currency: 'EUR' }}</td>
+      <td>{{ transaction.entityData.description }}</td>
+      <td>{{ transaction.computedFields.categoryName }}</td>
+      <td>
+        <p-tag [value]="transaction.entityData.status" [severity]="getSeverity(transaction.entityData.status)" />
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

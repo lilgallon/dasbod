@@ -1,0 +1,32 @@
+<p-table
+  [value]="budgetPlans()"
+  [tableStyle]="{ 'min-width': '60rem' }"
+  dataKey="id"
+  (onRowSelect)="onRowSelect($event)"
+  (onRowUnselect)="onRowUnselect()"
+  selectionMode="single">
+  <ng-template #caption>
+    <div class="flex items-center justify-between">
+      <span class="text-xl font-bold">Budgets</span>
+      <div>
+        <ng-content select="buttons"></ng-content>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template #header>
+    <tr>
+      <th>Date début</th>
+      <th>Date fin</th>
+      <th>Montant de départ</th>
+      <th>Revenu prévu</th>
+    </tr>
+  </ng-template>
+  <ng-template #body let-plan>
+    <tr [pSelectableRow]="plan">
+      <td>{{ plan.entityData.startDate | date: 'mediumDate' }}</td>
+      <td>{{ plan.entityData.endDate | date: 'mediumDate' }}</td>
+      <td>{{ plan.entityData.amountAtStart | currency: 'EUR' : 'symbol' : '1.2-2' : 'fr-FR' }}</td>
+      <td>{{ plan.entityData.expectedIncome | currency: 'EUR' : 'symbol' : '1.2-2' : 'fr-FR' }}</td>
+    </tr>
+  </ng-template>
+</p-table>
