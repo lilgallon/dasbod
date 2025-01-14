@@ -10,7 +10,7 @@ export class BudgetTransactionService {
       {
         id: '1000',
         entityData: {
-          date: new Date().toISOString(),
+          date: new Date(),
           amount: 65,
           description: 'essence',
           categoryId: 'car-id',
@@ -23,7 +23,7 @@ export class BudgetTransactionService {
       {
         id: '2000',
         entityData: {
-          date: new Date().toISOString(),
+          date: new Date(),
           amount: 65,
           description: 'essence 2',
           categoryId: 'car-id',

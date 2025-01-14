@@ -10,6 +10,7 @@ import { BudgetCategoryTableComponent } from '../../components/tables/budget-cat
 import { Button } from 'primeng/button';
 import { BudgetPlanCreateDialogComponent } from '../../components/dialogs/budget-plan-create-dialog/budget-plan-create-dialog.component';
 import { BudgetPlan } from '../../models/budget-entities';
+import { BudgetCategoryChartComponent } from '../../components/charts/budget-category-chart/budget-category-chart.component';
 
 @Component({
   selector: 'app-budgetin',
@@ -19,6 +20,7 @@ import { BudgetPlan } from '../../models/budget-entities';
     BudgetCategoryTableComponent,
     Button,
     BudgetPlanCreateDialogComponent,
+    BudgetCategoryChartComponent,
   ],
   templateUrl: './budgetin.component.html',
   styleUrl: './budgetin.component.css',

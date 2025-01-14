@@ -14,7 +14,7 @@ export interface BudgetCategory extends EntityData {
 }
 
 export interface BudgetTransaction extends EntityData {
-  date: string;
+  date: Date;
   categoryId: string;
   amount: number;
   description: string;
@@ -22,3 +22,5 @@ export interface BudgetTransaction extends EntityData {
 }
 
 export type BudgetTransactionStatus = 'PAID' | 'PROCESSING' | 'PLANNED';
+
+export const BudgetTransactionStatuses = ['PAID', 'PROCESSING', 'PLANNED'];

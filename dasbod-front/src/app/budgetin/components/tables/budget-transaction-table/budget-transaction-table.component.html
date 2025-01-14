@@ -1,8 +1,15 @@
-<p-table [value]="budgetTransactions()" [tableStyle]="{ 'min-width': '60rem' }">
+<p-table
+  [value]="budgetTransactions()"
+  [tableStyle]="{ 'min-width': '60rem' }"
+  dataKey="id"
+  editMode="row"
+  class="budget-transaction-table">
   <ng-template #caption>
     <div class="flex items-center justify-between">
       <span class="text-xl font-bold">Transactions</span>
-      <p-button icon="pi pi-refresh" rounded raised />
+      <div>
+        <ng-content select="buttons"></ng-content>
+      </div>
     </div>
   </ng-template>
   <ng-template #header>
@@ -12,16 +19,37 @@
       <th>Description</th>
       <th>Catégorie</th>
       <th>Status</th>
+      <th>Actions</th>
     </tr>
   </ng-template>
-  <ng-template #body let-transaction>
-    <tr>
-      <td>{{ transaction.entityData.date | date: 'mediumDate' }}</td>
-      <td>{{ transaction.entityData.amount | currency: 'EUR' }}</td>
-      <td>{{ transaction.entityData.description }}</td>
-      <td>{{ transaction.computedFields.categoryName }}</td>
+  <ng-template #body let-transaction let-editing="editing">
+    <tr [pEditableRow]="transaction">
+      <td><app-date-editable-table-column [(date)]="transaction.entityData.date"></app-date-editable-table-column></td>
       <td>
-        <p-tag [value]="transaction.entityData.status" [severity]="getSeverity(transaction.entityData.status)" />
+        <app-money-editable-table-column [(money)]="transaction.entityData.amount"></app-money-editable-table-column>
+      </td>
+      <td>
+        <app-label-editable-table-column
+          [(label)]="transaction.entityData.description"></app-label-editable-table-column>
+      </td>
+      <td>
+        <app-select-editable-table-column
+          [(choice)]="transaction.entityData.categoryId"
+          [choices]="selectableCategories()"></app-select-editable-table-column>
+      </td>
+      <td>
+        <app-select-editable-table-column
+          [(choice)]="transaction.entityData.status"
+          [choices]="BudgetTransactionStatuses">
+          <ng-template #selectable let-selectable>
+            <p-tag [value]="selectable" [severity]="getSeverity(selectable)" />
+          </ng-template>
+        </app-select-editable-table-column>
+      </td>
+      <td>
+        <app-edit-action-table-column
+          [editing]="editing"
+          (edit)="onRowEditSave(transaction)"></app-edit-action-table-column>
       </td>
     </tr>
   </ng-template>

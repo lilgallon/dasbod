@@ -1,7 +1,9 @@
 <p-table
+  class="budget-plan-table"
   [value]="budgetPlans()"
   [tableStyle]="{ 'min-width': '60rem' }"
   dataKey="id"
+  editMode="row"
   (onRowSelect)="onRowSelect($event)"
   (onRowUnselect)="onRowUnselect()"
   selectionMode="single">
@@ -19,14 +21,22 @@
       <th>Date fin</th>
       <th>Montant de départ</th>
       <th>Revenu prévu</th>
+      <th>Actions</th>
     </tr>
   </ng-template>
-  <ng-template #body let-plan>
-    <tr [pSelectableRow]="plan">
-      <td>{{ plan.entityData.startDate | date: 'mediumDate' }}</td>
-      <td>{{ plan.entityData.endDate | date: 'mediumDate' }}</td>
-      <td>{{ plan.entityData.amountAtStart | currency: 'EUR' : 'symbol' : '1.2-2' : 'fr-FR' }}</td>
-      <td>{{ plan.entityData.expectedIncome | currency: 'EUR' : 'symbol' : '1.2-2' : 'fr-FR' }}</td>
+  <ng-template #body let-plan let-editing="editing">
+    <tr [pSelectableRow]="plan" [pEditableRow]="plan">
+      <td><app-date-editable-table-column [(date)]="plan.entityData.startDate"></app-date-editable-table-column></td>
+      <td><app-date-editable-table-column [(date)]="plan.entityData.endDate"></app-date-editable-table-column></td>
+      <td>
+        <app-money-editable-table-column [(money)]="plan.entityData.amountAtStart"></app-money-editable-table-column>
+      </td>
+      <td>
+        <app-money-editable-table-column [(money)]="plan.entityData.expectedIncome"></app-money-editable-table-column>
+      </td>
+      <td>
+        <app-edit-action-table-column [editing]="editing" (edit)="onRowEditSave(plan)"></app-edit-action-table-column>
+      </td>
     </tr>
   </ng-template>
 </p-table>

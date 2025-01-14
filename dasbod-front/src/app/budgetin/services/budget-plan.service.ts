@@ -12,7 +12,17 @@ export class BudgetPlanService {
           amountAtStart: 123,
           expectedIncome: 2000,
           startDate: new Date(2025, 1, 1).toISOString(),
-          endDate: new Date(2025, 1, 31).toISOString(),
+          endDate: new Date(2025, 1, 20).toISOString(),
+        },
+        computedFields: {},
+      } as unknown as BudgetPlanDto,
+      {
+        id: 'budgetplan-id2',
+        entityData: {
+          amountAtStart: 400,
+          expectedIncome: 1000,
+          startDate: new Date(2025, 2, 1).toISOString(),
+          endDate: new Date(2025, 2, 28).toISOString(),
         },
         computedFields: {},
       } as unknown as BudgetPlanDto,
